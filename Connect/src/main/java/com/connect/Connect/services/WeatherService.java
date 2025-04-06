@@ -2,10 +2,10 @@ package com.connect.Connect.services;
 
 
 import com.connect.Connect.api.response.WeatherResponse;
+import com.connect.Connect.cashe.AppCashe;
 import com.connect.Connect.exceptions.WeatherServiceException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
@@ -17,11 +17,12 @@ import org.springframework.web.client.RestTemplate;
 public class WeatherService
 {
 
-    @Value("${weather.api.key}")
-    private String API_KEY;
+//    This method use when you store API in application.yml file.
+//    @Value("${weather.api.key}")
+//    private String API_KEY;
 
 
-    private static final String API = "http://api.weatherstack.com/current?access_key=<api_key>&query=<city>";
+    private static final String URL = "http://api.weatherstack.com/current?access_key=<api_key>&query=<city>";
 
 
     @Autowired
@@ -30,7 +31,11 @@ public class WeatherService
 
     public WeatherResponse getWeather(String city){
 
-        String FINAL_API = API.replace("<api_key>",API_KEY).replace("<city>",city);
+//          This method use when you store API in application.yml file.
+//        String FINAL_API = API.replace("<api_key>",API_KEY).replace("<city>",city);
+
+
+        String FINAL_API = URL.replace("<api_key>",AppCashe.APP_CASHE).replace("<city>",city);
         ResponseEntity<WeatherResponse> response = restTemplate.exchange(FINAL_API, HttpMethod.GET, null, WeatherResponse.class);
         WeatherResponse body = response.getBody();
         if (body == null || body.getCurrent() == null){

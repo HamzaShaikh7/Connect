@@ -14,9 +14,9 @@ spring:
 
 
 
-weather:
-  api:
-    key: e44f51fd9b1ce0fbd4f5bd9a1d81e057
+#weather:
+#  api:
+#    key: e44f51fd9b1ce0fbd4f5bd9a1d81e057
 
 
 server:
