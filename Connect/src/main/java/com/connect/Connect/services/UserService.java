@@ -17,7 +17,8 @@ public class UserService
 
 
     public String createNewAccount(User user) throws Exception {
-        if (userRepository.findByusername(user.getUsername())!=null){
+        User db_user = userRepository.findByusername(user.getUsername());
+        if (db_user!=null){
             throw new Exception("User already exist");
         }
         user.setRole("USER");
