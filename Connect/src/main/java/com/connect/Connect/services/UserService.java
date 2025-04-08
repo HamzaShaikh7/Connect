@@ -4,15 +4,11 @@ package com.connect.Connect.services;
 import com.connect.Connect.entries.User;
 import com.connect.Connect.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
-
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
+
 
 @Component
 public class UserService
@@ -54,5 +50,10 @@ public class UserService
         db_user.setEmail_address(user.getEmail_address());
         userRepository.save(db_user);
         return db_user;
+    }
+
+
+    public void saveUser(User user){
+        userRepository.save(user);
     }
 }
