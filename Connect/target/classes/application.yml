@@ -5,6 +5,9 @@ spring:
   name: Connect
   profiles:
     active: prod
+  redis:
+    host: localhost
+    port: 6379
   data:
     mongodb:
       host: localhost
