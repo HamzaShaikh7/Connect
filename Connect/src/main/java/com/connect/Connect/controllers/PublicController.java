@@ -3,6 +3,7 @@ package com.connect.Connect.controllers;
 
 import com.connect.Connect.entries.User;
 import com.connect.Connect.exceptions.WeatherServiceException;
+import com.connect.Connect.services.EmailService;
 import com.connect.Connect.services.UserService;
 import com.connect.Connect.services.WeatherService;
 import lombok.RequiredArgsConstructor;
@@ -32,6 +33,10 @@ public class PublicController
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private EmailService emailService;
+
+
     @GetMapping("/health-check")
     public ResponseEntity<String> healthCheck() {
         return new ResponseEntity<>(HEALTH_CHECK_SUCCESS,HttpStatus.OK);
@@ -59,5 +64,11 @@ public class PublicController
         } catch (Exception e) {
             return new ResponseEntity<>(e.getMessage(),HttpStatus.BAD_REQUEST);
         }
+    }
+
+
+    @GetMapping("/sendmail")
+    public void sendMail(){
+        emailService.sendSimpleEmail("shaikhhamza0522@gmail.com","Spring boot demo", "Test");
     }
 }
